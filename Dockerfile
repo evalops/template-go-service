@@ -10,7 +10,6 @@ RUN go mod download
 
 COPY . .
 
-# TODO: Replace "service" with your service name in both -o flag and build path.
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
 	go build -trimpath -ldflags="-s -w" -o /out/service ./cmd/service
 
