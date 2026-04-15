@@ -1,0 +1,37 @@
+name: GHCR Publish
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ghcr-publish-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  IMAGE_NAME: ghcr.io/evalops/template-go-service
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Build image
+        uses: evalops/service-runtime/.github/actions/publish-ghcr-image@aedb2021c693c5194c81c710b89e63c9340bfdc8
+        with:
+          image_name: ${{ env.IMAGE_NAME }}
+          github_actor: ${{ github.actor }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: ./Dockerfile
+          build_args: |
+            GO_BUILDER_IMAGE=golang:1.26-alpine
+          push: ${{ github.event_name != 'pull_request' }}
+          load: ${{ github.event_name == 'pull_request' }}
