@@ -10,6 +10,16 @@ if [ ${#staged_go_files[@]} -eq 0 ]; then
   exit 0
 fi
 
+if ! command -v golangci-lint >/dev/null 2>&1; then
+  echo "golangci-lint is required for this repo. Install it and retry." >&2
+  exit 1
+fi
+
+if ! command -v gosec >/dev/null 2>&1; then
+  echo "gosec is required for this repo. Install it and retry." >&2
+  exit 1
+fi
+
 stashed=0
 cleanup() {
   if [ "$stashed" -eq 1 ]; then
@@ -26,16 +36,6 @@ fi
 echo "Running gofmt on staged files..."
 gofmt -w "${staged_go_files[@]}"
 git add -- "${staged_go_files[@]}"
-
-if ! command -v golangci-lint >/dev/null 2>&1; then
-  echo "golangci-lint is required for this repo. Install it and retry." >&2
-  exit 1
-fi
-
-if ! command -v gosec >/dev/null 2>&1; then
-  echo "gosec is required for this repo. Install it and retry." >&2
-  exit 1
-fi
 
 echo "Running go vet..."
 go vet ./...
