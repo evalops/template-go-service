@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/evalops/service-runtime/health"
+	"github.com/evalops/service-runtime/httpkit"
 )
 
 func main() {
@@ -19,7 +20,9 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	health.Register(mux)
+	checker := health.New()
+	mux.Handle("/healthz", httpkit.HealthHandler("service"))
+	mux.Handle("/readyz", checker.ReadyzHandler())
 
 	server := &http.Server{
 		Addr:              ":" + port,
