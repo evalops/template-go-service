@@ -1,6 +1,39 @@
 # template-go-service
 
-Template repository for new EvalOps Go microservices. Use GitHub's "Use this template" button to scaffold a new service.
+Deprecated template repository for standalone EvalOps Go microservices.
+
+New Go service work now belongs in the `evalops/platform` monorepo. Do not use
+GitHub's **Use this template** button for new production services.
+
+## Current path
+
+Use Platform's repo-local generator instead:
+
+```bash
+git clone https://github.com/evalops/platform.git
+cd platform
+make new-service NAME=<your-service>
+make repo-consolidation-check
+```
+
+Then open the Platform PR with any matching deploy handoff. The live
+consolidation ledger is in
+[`evalops/platform/docs/repositories/consolidation.md`](https://github.com/evalops/platform/blob/main/docs/repositories/consolidation.md);
+the follow-up archive work is tracked in
+[`evalops/platform#1768`](https://github.com/evalops/platform/issues/1768).
+
+## Why this changed
+
+EvalOps consolidated Go services, shared runtime code, protobuf contracts,
+generated SDKs, service docs, build metadata, and service CI into
+`evalops/platform`. Keeping this template active would recreate the old
+cross-repo operating model: separate proto bumps, runtime version drift,
+duplicated CI, and split PR chains for changes that should land atomically.
+
+If a Go codebase truly needs to stay outside Platform, document that exception
+in the Platform consolidation ledger before creating or extending the repo.
+
+## Historical usage
 
 ## Getting started
 
