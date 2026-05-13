@@ -2,7 +2,7 @@ module github.com/evalops/template-go-service
 
 go 1.26.0
 
-require github.com/evalops/service-runtime v0.1.51
+require github.com/evalops/service-runtime v0.1.53
 
 require (
 	connectrpc.com/connect v1.19.1 // indirect
@@ -24,6 +24,6 @@ require (
 	go.opentelemetry.io/otel/metric v1.43.0 // indirect
 	go.opentelemetry.io/otel/trace v1.43.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
-	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/sys v0.43.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
