@@ -35,6 +35,8 @@ in the Platform consolidation ledger before creating or extending the repo.
 
 ## Historical usage
 
+The original template notes are retained below for existing repositories.
+
 ## Getting started
 
 1. Click **Use this template** on GitHub to create a new repo from this template.
