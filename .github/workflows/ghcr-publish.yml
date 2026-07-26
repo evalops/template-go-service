@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Build image
         uses: evalops/service-runtime/.github/actions/publish-ghcr-image@aedb2021c693c5194c81c710b89e63c9340bfdc8
