@@ -2,7 +2,7 @@ module github.com/evalops/template-go-service
 
 go 1.26.0
 
-require github.com/evalops/service-runtime v0.1.54
+require github.com/evalops/service-runtime v0.1.56
 
 require (
 	connectrpc.com/connect v1.19.1 // indirect
